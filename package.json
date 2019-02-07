@@ -1,8 +1,9 @@
 {
   "private": true,
   "version": "0.8.12",
-  "name": "react-native-web",
+  "name": "react-native-web-monorepo",
   "scripts": {
+    "postinstall": "mkdir rnw; cd rnw; git init; git remote add -f origin https://github.com/ahmedhus/react-native-web.git; git config core.sparseCheckout true; echo \"packages/react-native-web\" >> .git/info/sparse-checkout; git pull --depth=1 origin master; cd ..; npm i ./rnw/packages/react-native-web/",
     "clean": "del ./packages/*/dist",
     "compile": "npm-run-all clean -p \"compile:* -- {@}\" --",
     "compile:commonjs": "cd packages/react-native-web && BABEL_ENV=commonjs babel src --out-dir dist/cjs --ignore \"**/__tests__\"",
